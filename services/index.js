@@ -210,8 +210,6 @@ app.use(express.json());
 // Mounting the external routes under /auth
 app.use('/auth', authRoutes);
 
-// Helper Log to see if .env is working
-console.log("DEBUG: JWT Secret is loaded:", process.env.JWT_SECRET ? "YES" : "NO");
 
 // --- 1. PUBLIC ROUTES ---
 
@@ -350,8 +348,8 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // Step 2: Handle any requests that don't match the API routes
 // This ensures React Router handles the page navigation
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 // Setup and Listen
 app.get('/setup', async (req, res) => {
