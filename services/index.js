@@ -201,7 +201,7 @@ const pool = require('./db');
 require('dotenv').config();
 const authRoutes = require('./routes/userRoutes');
 const cors = require('cors'); 
-
+const path = require('path');
 const app = express();
 
 app.use(cors()); 
@@ -345,7 +345,14 @@ app.delete('/unsave-post/:id', authenticateToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+// Step 1: Serve the static files from the React app build folder
+app.use(express.static(path.join(__dirname, 'build')));
 
+// Step 2: Handle any requests that don't match the API routes
+// This ensures React Router handles the page navigation
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 // Setup and Listen
 app.get('/setup', async (req, res) => {
     // ... setup logic from your code ...
