@@ -316,7 +316,7 @@ app.use(express.static(path.join(__dirname, '../build')));
  * Using '(.*)' handles the catch-all for React Router navigation 
  * without triggering the PathError in Express 5.
  */
-app.get('(.*)', (req, res) => {
+app.get('/:slug*', (req, res) => {
   res.sendFile(path.join(__dirname, '../build', 'index.html'));
 });
 
