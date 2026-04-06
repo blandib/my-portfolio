@@ -21,7 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-   "start": "node index.js",
+  "start": "node services/index.js",
   "build": "npm install && react-scripts build",
   "test": "react-scripts test",
   "eject": "react-scripts eject"
