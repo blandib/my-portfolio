@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 // ADD THIS LINE TO THE TOP:
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 
-console.log("DEBUG: JWT Secret in middleware is:", process.env.JWT_SECRET);
+
 
 module.exports = (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
     req.user = { id: decodedToken.id };
     next();
   } catch (error) {
-    console.error("JWT Verify Error:", error.message); // Log the specific error
+    
     return res.status(401).json({ message: 'Authentication failed: Invalid token' });
   }
 };
