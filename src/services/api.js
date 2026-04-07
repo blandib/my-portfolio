@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 // Ensure this matches the port your backend is running on!
 const api = axios.create({
-  baseURL: 'http://localhost:5000', 
+  baseURL: 'https://my-portfolio-v2cc.onrender.com', 
 });
 
 // This automatically attaches your JWT to every request

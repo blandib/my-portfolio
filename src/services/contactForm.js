@@ -13,7 +13,7 @@ const ContactForm = () => {
     setStatus('Sending...');
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', { // Update with your Render/Backend URL
+      const response = await fetch('https://my-portfolio-v2cc.onrender.com', { // Update with your Render/Backend URL
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
