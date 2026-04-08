@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
-
+import ProjectList from '../components/ProjectList';
 const DashboardScreen = () => {
   const [userData, setUserData] = useState(null); 
   const navigate = useNavigate();
@@ -94,7 +94,16 @@ const DashboardScreen = () => {
           <hr />
           <h3>Donation History</h3>
           {/* ... donation map code stays the same ... */}
-          
+          <hr />
+<h3>Featured Portfolio Projects</h3>
+<ProjectList />
+
+<button 
+  onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}
+  // ... style ...
+>
+  Logout
+</button>
           <button 
             onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}
             style={{ marginTop: '20px', padding: '10px', backgroundColor: '#555', color: 'white', border: 'none', borderRadius: '5px' }}
