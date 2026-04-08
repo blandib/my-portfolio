@@ -36,3 +36,81 @@
     transform: rotate(360deg);
   }
 }
+/* Container for the projects */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Individual Card */
+.project-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card:hover { 
+  transform: translateY(-5px); 
+}
+
+/* NEW: Container for the Image Tag */
+.project-image-container {
+  width: 100%;
+  height: 200px; /* Fixed height so all cards match */
+  overflow: hidden;
+  background-color: #f8f9fa; /* Placeholder color while loading */
+}
+
+/* NEW: The Image itself */
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This is the magic: it crops the image to fit without stretching */
+  transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-img {
+  transform: scale(1.1); /* Zoom effect for your 3D landscapes */
+}
+
+.project-content { 
+  padding: 20px; 
+  flex-grow: 1; /* Makes content fill the space if description is short */
+}
+
+.skill-tag {
+  background: #eef2f3;
+  color: #333;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-right: 6px;
+  display: inline-block;
+  margin-top: 8px;
+  border: 1px solid #dfe6e9;
+}
+
+/* Links inside the card */
+.project-links {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.project-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}

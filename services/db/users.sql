@@ -115,7 +115,21 @@ CREATE TABLE IF NOT EXISTS donations (
   status VARCHAR(50) DEFAULT 'completed',
   transaction_date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
-
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    description TEXT,
+    image_url TEXT,
+    github_link TEXT,
+    demo_link TEXT,
+    skills TEXT[], -- Using an array for skills
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS analytics (
+    id SERIAL PRIMARY KEY,
+    event_name VARCHAR(50) DEFAULT 'resume_download',
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 
 
 
