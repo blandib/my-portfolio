@@ -114,3 +114,45 @@
 .project-links a:hover {
   text-decoration: underline;
 }
+.app-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #1a1a2e; /* Dark professional blue */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: fixed;
+  height: 100vh;
+}
+
+.main-content {
+  margin-left: 260px; /* Same as sidebar width */
+  flex-grow: 1;
+  padding: 40px;
+  background-color: #f8f9fa;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+  margin-bottom: 5px;
+}
+
+.nav-item:hover, .nav-item.active {
+  background-color: #16213e;
+  color: #4ecca3; /* Accent color */
+}
+
+.logout:hover {
+  color: #ff4d4d;
+}
