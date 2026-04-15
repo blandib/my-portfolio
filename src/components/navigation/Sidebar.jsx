@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { FiHome, FiFolder, FiUser, FiLogOut, FiGithub } from 'react-icons/fi'; // Install react-icons
+import { FiHome, FiFolder, FiUser, FiLogOut, FiGithub } from 'react-icons/fi';
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -17,8 +17,21 @@ const Sidebar = () => {
     navigate('/login');
   };
 
+  // 1. FIXED STYLE OBJECT: Changed ; to , and added required layout styles
+  const sidebarStyle = {
+    width: '280px',
+    height: '100vh',
+    position: 'fixed',
+    left: 0,
+    top: 0,
+    zIndex: 1000, 
+    //backgroundColor: 'dark blue', // Keeps it solid so projects don't show through
+    borderRight: '1px solid #eee'
+  };
+
   return (
-    <div className="sidebar">
+    /* 2. APPLIED STYLE: Added style={sidebarStyle} here */
+    <div className="sidebar" style={sidebarStyle}>
       <div className="sidebar-logo">
         <h2>BlandineTech</h2>
       </div>
@@ -44,17 +57,13 @@ const Sidebar = () => {
           <FiLogOut /> <span>Logout</span>
         </div>
       </div>
-      <div className="resume-section">
-  <h3>Professional Documents</h3>
-  <a 
-    href="/Blandine_resume.pdf" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    className="btn-resume"
-  >
-    View Current Resume
-  </a>
- 
+
+      <div 
+  className="nav-item" 
+  onClick={() => navigate('/resume')}
+  style={{ cursor: 'pointer' }}
+>
+  <FiUser /> <span>Resume Management</span>
 </div>
     </div>
   );

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import ProjectList from '../components/ProjectList';
+
 const DashboardScreen = () => {
   const [userData, setUserData] = useState(null); 
   const navigate = useNavigate();
 
-  // --- 1. Fetch Logic ---
   useEffect(() => {
     const fetchUserData = async () => {
       const token = localStorage.getItem('token');
@@ -28,18 +28,15 @@ const DashboardScreen = () => {
     fetchUserData();
   }, [navigate]);
 
-  // --- 2. Delete Logic (MUST BE INSIDE THE COMPONENT) ---
   const handleDelete = async (postId) => {
     const token = localStorage.getItem('token');
     if (!window.confirm("Are you sure you want to remove this saved post?")) return;
 
     try {
-      // Matches your backend route: /unsave-post/:id
       await api.delete(`/unsave-post/${postId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
-      // Update the UI immediately without refreshing the whole page
       setUserData({
         ...userData,
         savedPosts: userData.savedPosts.filter(post => post.id !== postId)
@@ -50,9 +47,8 @@ const DashboardScreen = () => {
     }
   };
 
-  // --- 3. UI Render ---
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
+    <div style={{ padding: '20px', fontFamily: 'Arial', width: '100%' }}>
       {userData ? (
         <>
           <h1>Welcome, {userData.user.name}! 👋</h1>
@@ -92,24 +88,11 @@ const DashboardScreen = () => {
           )}
 
           <hr />
-          <h3>Donation History</h3>
-          {/* ... donation map code stays the same ... */}
-          <hr />
-<h3>Featured Portfolio Projects</h3>
-<ProjectList />
+          <h3>Featured Portfolio Projects</h3>
+          {/* Check if ProjectList.jsx has a Sidebar inside it! If it does, delete it there. */}
+          <ProjectList />
 
-<button 
-  onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}
-  // ... style ...
->
-  Logout
-</button>
-          <button 
-            onClick={() => { localStorage.removeItem('token'); navigate('/login'); }}
-            style={{ marginTop: '20px', padding: '10px', backgroundColor: '#555', color: 'white', border: 'none', borderRadius: '5px' }}
-          >
-            Logout
-          </button>
+          {/* I removed the extra logout buttons from here because they are in your Sidebar already */}
         </>
       ) : (
         <p>Loading your dashboard...</p>

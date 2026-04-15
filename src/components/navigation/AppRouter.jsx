@@ -1,11 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginScreen from '../../screens/LoginScreen.jsx';
 import RegisterScreen from '../../screens/RegisterScreen.jsx';
 import HomeScreen from '../../screens/HomeScreen.jsx';
 import DashboardScreen from '../../screens/DashboardScreen.jsx';
-import ProjectList from '../ProjectList.jsx'; // Path to  projects
-import Sidebar from './Sidebar.jsx'; // Path to  sidebar
+import ProjectList from '../ProjectList.jsx'; 
+import Sidebar from './Sidebar.jsx'; 
+import ResumePage from '../Resume.jsx';
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('token');
@@ -19,41 +20,36 @@ const AppRouter = () => {
     <Router>
       <div style={{ display: 'flex', minHeight: '100vh' }}>
         
-        {/* Only show Sidebar if logged in */}
+        {/* Sidebar only appears once here */}
         {token && <Sidebar />}
 
-        <main style={{ flex: 1, padding: '20px' }}>
-          {/* Public Nav: Only show if NOT logged in */}
-          {!token && (
-            <nav className="public-nav">
-              <Link to="/login" style={{ marginRight: '10px' }}>Login</Link>
-              <Link to="/register">Register</Link>
-            </nav>
-          )}
-
+        <main style={{ flex: 1, 
+          marginLeft: token ? '100px' : '0', // Automatically adds the gap if you are logged in
+        width: '100%',
+        }}>
           <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<HomeScreen />} />
+            {/* PUBLIC ROUTES */}
+            {/* The 'path="/"' combined with 'index' ensures Home ONLY shows at the start */}
+            <Route path="/" element={<HomeScreen />} index /> 
             <Route path="/login" element={<LoginScreen />} />
             <Route path="/register" element={<RegisterScreen />} />
 
-            {/* Protected Routes (These use your existing Dashboard logic) */}
+            {/* PROTECTED ROUTES */}
             <Route 
               path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <DashboardScreen /> 
-                </ProtectedRoute>
-              } 
+              element={<ProtectedRoute><DashboardScreen /></ProtectedRoute>} 
             />
             <Route 
               path="/projects" 
-              element={
-                <ProtectedRoute>
-                  <ProjectList />
-                </ProtectedRoute>
-              } 
+              element={<ProtectedRoute><ProjectList /></ProtectedRoute>} 
             />
+            <Route 
+              path="/resume" 
+              element={<ProtectedRoute><ResumePage /></ProtectedRoute>} 
+            />
+
+            {/* FALLBACK */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
       </div>
@@ -61,12 +57,4 @@ const AppRouter = () => {
   );
 };
 
- // Express 5 Wildcard Fix:
- //* Using '(.*)' handles the catch-all for React Router navigation 
- //* without triggering the PathError in Express 5.
- //*/
-// This is a Regular Expression that matches any path
-//app.get(/.*/, (req, res) => {
- // res.sendFile(path.join(__dirname, '../build', 'index.html'));
-//});
 export default AppRouter;
