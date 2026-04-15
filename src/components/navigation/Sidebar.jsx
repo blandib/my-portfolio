@@ -20,7 +20,7 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <h2>Blandine.dev</h2>
+        <h2>BlandineTech</h2>
       </div>
       
       <nav className="sidebar-nav">
@@ -44,6 +44,18 @@ const Sidebar = () => {
           <FiLogOut /> <span>Logout</span>
         </div>
       </div>
+      <div className="resume-section">
+  <h3>Professional Documents</h3>
+  <a 
+    href="/Blandine_resume.pdf" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="btn-resume"
+  >
+    View Current Resume
+  </a>
+ 
+</div>
     </div>
   );
 };

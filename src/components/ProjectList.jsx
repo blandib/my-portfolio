@@ -34,9 +34,22 @@ const ProjectList = () => {
     return <div className="loading">Loading your amazing projects...</div>;
   }
 
-  return (
+ return (
     <section className="portfolio-section">
-      <h2>My Technical Projects</h2>
+      {/* ADDED: Resume Section at the top of the dashboard */}
+      <div className="dashboard-controls" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <h2>My Technical Projects</h2>
+        <a 
+          href="/Blandine_resume.pdf" 
+          target="_blank" 
+          rel="noreferrer" 
+          className="btn-resume"
+          style={{ padding: '10px 20px', backgroundColor: '#007bff', color: 'white', borderRadius: '5px', textDecoration: 'none', fontWeight: 'bold' }}
+        >
+          📄 View/Download Resume
+        </a>
+      </div>
+
       <div className="project-grid">
         {Array.isArray(projects) && projects.length > 0 ? (
           projects.map((project) => (
@@ -60,17 +73,19 @@ const ProjectList = () => {
                   ))}
                 </div>
 
-                <div className="project-links">
-                  {project.github_link && (
-                    <a href={project.github_link} target="_blank" rel="noreferrer" className="link-btn">
-                      GitHub
-                    </a>
-                  )}
-                  {project.demo_link && (
-                    <a href={project.demo_link} target="_blank" rel="noreferrer" className="link-btn primary">
-                      Live Demo
-                    </a>
-                  )}
+                <div className="card-actions">
+                  {/* FIX: Added rel="noreferrer" for security */}
+                  <a 
+                    href={project.demoLink} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="btn-demo"
+                  >
+                    Live Demo
+                  </a>
+                  
+                  {/* FIX: Commented out handleEdit to stop the 'not defined' error */}
+                  {/* <button onClick={() => console.log("Edit functionality coming soon")}>Edit</button> */}
                 </div>
               </div>
             </div>
@@ -83,6 +98,6 @@ const ProjectList = () => {
       </div>
     </section>
   );
-};
+}
 
 export default ProjectList;
